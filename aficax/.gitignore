@@ -1,0 +1,49 @@
+# C:\Users\aficado\Desktop\Aficax\aficax\.gitignore
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Bun
+.bun/
+# Bun build cache (created by `bun build` / `bun --bun build`)
+*.bun-build
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+bun-debug.log*
+bun-error.log*
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Aficax runtime data (when installed as a tool)
+.aficax/
+*.aficax-sess-*

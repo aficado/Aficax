@@ -1,0 +1,46 @@
+{
+  "name": "@aficax/tui",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Aficax TUI: Ink-based terminal client that connects to the server.",
+  "type": "module",
+  "main": "./src/index.tsx",
+  "types": "./src/index.tsx",
+  "exports": {
+    ".": {
+      "types": "./src/index.tsx",
+      "import": "./src/index.tsx"
+    },
+    "./app": {
+      "types": "./src/components/App.tsx",
+      "import": "./src/components/App.tsx"
+    },
+    "./client/api": {
+      "types": "./src/client/api.ts",
+      "import": "./src/client/api.ts"
+    }
+  },
+  "scripts": {
+    "dev": "bun run --watch src/index.tsx",
+    "build": "bun build ./src/index.tsx --outdir dist --target bun --format esm",
+    "start": "bun run src/index.tsx",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .tsbuildinfo",
+    "test": "bun test tests/"
+  },
+  "dependencies": {
+    "@aficax/core": "workspace:*",
+    "chalk": "^5.3.0",
+    "ink": "^4.4.0",
+    "ink-spinner": "^5.0.0",
+    "react": "^18.3.1",
+    "react-devtools-core": "^7.0.1",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.6",
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.3.0",
+    "typescript": "^5.4.5"
+  }
+}

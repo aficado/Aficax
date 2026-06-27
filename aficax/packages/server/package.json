@@ -1,0 +1,41 @@
+// C:\Users\aficado\Desktop\Aficax\aficax\packages\server\package.json
+{
+  "name": "@aficax/server",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Aficax server: Hono HTTP/SSE endpoint hosting the agent loop.",
+  "type": "module",
+  "main": "./src/exports.ts",
+  "types": "./src/exports.ts",
+  "exports": {
+    ".": {
+      "types": "./src/exports.ts",
+      "import": "./src/exports.ts"
+    }
+  },
+  "scripts": {
+    "dev": "bun run --watch src/bin.ts",
+    "build": "bun build ./src/bin.ts --outdir dist --target bun --format esm",
+    "start": "bun run src/bin.ts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .tsbuildinfo",
+    "test": "bun test tests/",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push"
+  },
+  "dependencies": {
+    "@aficax/core": "workspace:*",
+    "@ai-sdk/anthropic": "^0.0.50",
+    "@ai-sdk/google": "^0.0.50",
+    "@ai-sdk/openai": "^0.0.50",
+    "ai": "^3.4.0",
+    "drizzle-orm": "latest",
+    "hono": "^4.6.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.6",
+    "@types/node": "^20.12.7",
+    "drizzle-kit": "latest",
+    "typescript": "^5.4.5"
+  }
+}

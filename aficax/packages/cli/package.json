@@ -1,0 +1,44 @@
+// C:\Users\aficado\Desktop\Aficax\aficax\packages\cli\package.json
+{
+  "name": "@aficax/cli",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Aficax CLI: the `aficax` binary entry point that boots server and TUI.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "bin": {
+    "aficax": "./src/index.ts"
+  },
+  "exports": {
+    ".": {
+      "types": "./src/index.ts",
+      "import": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build:esm": "bun build ./src/index.ts --outdir dist --target bun --format esm",
+    "build:assets": "bun run scripts/copy-yoga.ts",
+    "build": "bun run build:esm && bun run build:assets",
+    "start": "bun run src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist .tsbuildinfo",
+    "test": "bun test tests/"
+  },
+  "dependencies": {
+    "@aficax/core": "workspace:*",
+    "@aficax/server": "workspace:*",
+    "@aficax/tui": "workspace:*",
+    "ink": "^4.4.0",
+    "ink-spinner": "^5.0.0",
+    "react": "^18.3.1",
+    "react-devtools-core": "^7.0.1",
+    "zustand": "^4.5.5"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.6",
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.3.0",
+    "typescript": "^5.4.5"
+  }
+}

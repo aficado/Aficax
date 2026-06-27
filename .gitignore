@@ -1,0 +1,18 @@
+# Top-level ignores for the Aficax workspace.
+# The inner `aficax/` package has its own .gitignore that handles
+# node_modules, dist, .tsbuildinfo, etc. for the monorepo. This file
+# only covers the top-level content that lives outside the monorepo.
+
+# Orphan / historical content kept on disk, intentionally not in the repo
+packages/tui/
+img1.jpeg
+img2.jpeg
+
+# Per-machine Claude Code settings (do not commit user-specific permissions)
+.claude/
+
+# Belt-and-braces for any stray build artefacts at the workspace root
+*.tsbuildinfo
+*.log
+.DS_Store
+Thumbs.db

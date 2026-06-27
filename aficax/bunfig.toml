@@ -1,0 +1,20 @@
+# C:\Users\aficado\Desktop\Aficax\aficax\bunfig.toml
+# Bun runtime, package manager, test runner, and bundler configuration.
+# Workspaces are auto-detected from the root package.json `workspaces` field.
+
+[install]
+# Use isolated linker to keep dependencies per-package and avoid phantom dependencies.
+linker = "isolated"
+# Install exact versions in lockfile
+saveExact = true
+
+[install.scopes]
+
+[test]
+# Preload scripts run before each test file. Add paths here when needed.
+# Use bun's built-in test runner
+coverage = false
+
+[run]
+# Default shell for `bun run` scripts
+shell = "system"

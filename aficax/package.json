@@ -1,0 +1,27 @@
+// C:\Users\aficado\Desktop\Aficax\aficax\package.json
+{
+  "name": "aficax",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Aficax — AI agent for software development in the terminal.",
+  "type": "module",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "cd packages/server && bun run dev",
+    "build": "bun run scripts/build.ts",
+    "start": "cd packages/cli && bun run start",
+    "lint": "echo 'lint: not configured yet'",
+    "typecheck": "bun run scripts/typecheck.ts",
+    "clean": "bun run scripts/clean.ts"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5",
+    "@types/node": "^20.12.7",
+    "@types/bun": "^1.1.6"
+  },
+  "engines": {
+    "bun": ">=1.1.0"
+  }
+}
