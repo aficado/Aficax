@@ -835,14 +835,19 @@ export class QueryEngine {
   }
 
   private buildContext(params: RunParams): ToolContext {
-    if (params.signal === undefined) {
-      return { sessionId: params.sessionId, workingDir: params.workingDir };
-    }
-    return {
+    // Inherit the parent session's provider/model so sub-agents spawned
+    // by tools like `spawn_agent` default to the same backend instead of
+    // a hardcoded "anthropic" + "claude-sonnet-4-6" pair.
+    const inherited = {
       sessionId: params.sessionId,
       workingDir: params.workingDir,
-      signal: params.signal,
+      provider: params.providerId,
+      model: params.modelId,
     };
+    if (params.signal === undefined) {
+      return inherited;
+    }
+    return { ...inherited, signal: params.signal };
   }
 
   // -- Compaction cascade -----------------------------------------------

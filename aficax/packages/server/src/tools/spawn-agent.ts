@@ -112,8 +112,12 @@ export function createSpawnAgentTool(options: SpawnAgentToolOptions): ToolImplem
       const baseOptions = {
         task,
         workingDir,
-        providerId: provider ?? options.defaultProviderId,
-        modelId: model ?? options.defaultModelId,
+        // Inherit the parent session's provider/model when the caller
+        // does not supply an explicit override. This keeps sub-agents
+        // working for users on local backends (Ollama, LM Studio)
+        // instead of always falling back to the Anthropic defaults.
+        providerId: provider ?? context.provider ?? options.defaultProviderId,
+        modelId: model ?? context.model ?? options.defaultModelId,
       };
       const spawnOptions: SpawnOptions = {
         ...baseOptions,

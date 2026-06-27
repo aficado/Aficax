@@ -12,6 +12,15 @@ export interface ToolContext {
   readonly workingDir: string;
   /** Abort signal triggered when the client disconnects or the loop is cancelled. */
   readonly signal?: AbortSignal;
+  /**
+   * Provider id of the active session. Surfaced so tools that need to
+   * spawn sub-agents (e.g. `spawn_agent`) can inherit the parent's
+   * provider when no override is supplied. Optional for back-compat
+   * with unit tests that build a bare context.
+   */
+  readonly provider?: string;
+  /** Model id of the active session. See `provider` for rationale. */
+  readonly model?: string;
 }
 
 /** A registered tool: metadata plus its execute function. */
