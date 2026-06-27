@@ -179,7 +179,8 @@ export class AficaxClient {
   }
 
   public listSessions(): Promise<SessionSummary[]> {
-    return this.request<SessionSummary[]>("GET", "/sessions");
+    return this.request<{ sessions: SessionSummary[]; count: number }>("GET", "/sessions")
+      .then((body) => body.sessions);
   }
 
   public sendApproval(sessionId: string, decision: ApprovalDecision): Promise<void> {
@@ -187,13 +188,6 @@ export class AficaxClient {
       "POST",
       `/sessions/${encodeURIComponent(sessionId)}/approve`,
       decision
-    );
-  }
-
-  public interruptSession(sessionId: string): Promise<void> {
-    return this.request<void>(
-      "POST",
-      `/sessions/${encodeURIComponent(sessionId)}/interrupt`
     );
   }
 

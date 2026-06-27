@@ -263,8 +263,23 @@ export function App(props: AppProps): JSX.Element {
           return;
         case "exit":
           process.exit(0);
-        default:
+        default: {
+          // The CLI slash handler (`packages/cli/src/slash/handler.ts`)
+          // exposes a much larger catalogue than the TUI currently
+          // wires up (e.g. /compact, /skills, /memory, /diff, /commit,
+          // /review, /test, /config, /allow, /deny, /cost, /history,
+          // /debug, /provider). Until those are ported here we surface
+          // a system message instead of silently swallowing the input,
+          // so the user knows the command was recognised but is not
+          // yet available in the TUI.
+          addMessage({
+            id: makeSystemId(),
+            role: "system",
+            content: `/${command.name} is not implemented in the TUI yet. Run it from the CLI, or wait for it to be wired up.`,
+            timestamp: Date.now(),
+          });
           return;
+        }
       }
     },
     [addMessage, clearMessages, session.client, session.session, setMode, stream],
