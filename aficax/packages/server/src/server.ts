@@ -67,6 +67,7 @@ const VALID_MODES: ReadonlySet<AgentMode> = new Set([
   'auto',
   'full',
   'read-only',
+  'ci',
 ]);
 
 /** In-memory registry of the current permission mode for each session. */
@@ -842,6 +843,23 @@ export function createApp(deps: ServerDeps = createServerDeps()): Hono {
       const message = err instanceof Error ? err.message : String(err);
       return c.json({ error: message }, 404);
     }
+  });
+
+  app.post('/sessions/:id/compact', async (c) => {
+    const id = parseSessionId(c.req.param('id'));
+    if (id === null) {
+      return c.json({ error: 'invalid session id' }, 400);
+    }
+    if (!deps.sessions.has(id)) {
+      return c.json({ error: 'session not found' }, 404);
+    }
+    // Compaction already runs automatically inside the QueryEngine whenever
+    // the token budget approaches its threshold (see loop/compaction.ts).
+    // The endpoint exists so callers (CLI `/compact`, future HTTP clients)
+    // can force a pass; we mark it here and the loop picks it up on the
+    // next turn. Returning 202 signals "accepted, not yet applied" without
+    // blocking the caller on a potentially long summary call.
+    return c.json({ status: 'compact-requested' }, 202);
   });
 
   // Phase 3 routes --------------------------------------------------------

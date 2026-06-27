@@ -49,7 +49,7 @@ import { classifyDanger, type Classification } from './classifier.js';
 const logger = getLogger();
 
 /** Agent permission modes. */
-export type AgentMode = 'plan' | 'auto' | 'full' | 'read-only';
+export type AgentMode = 'plan' | 'auto' | 'full' | 'read-only' | 'ci';
 
 /** Why the engine arrived at its decision. Used in logs and UI. */
 export type PermissionReason =

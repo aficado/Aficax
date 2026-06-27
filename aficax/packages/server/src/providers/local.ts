@@ -50,7 +50,11 @@ export function detectLocalBackend(baseUrl: string): LocalBackend {
 
 /** Adapter for local model servers (Ollama, LM Studio, and similar). */
 export class LocalAdapter extends OpenAIAdapter {
-  override readonly type: ProviderType = 'openai';
+  // The base OpenAIAdapter sets `type = 'openai'` via field initializer,
+  // which runs before `this.backend` is assigned. We override the value
+  // explicitly in the constructor so `type` reflects the actual backend
+  // (ollama / lmstudio / custom) instead of always reporting `openai`.
+  override readonly type: ProviderType;
   readonly backend: LocalBackend;
 
   constructor(config: ProviderConnectionConfig) {
@@ -65,6 +69,7 @@ export class LocalAdapter extends OpenAIAdapter {
       : placeholderApiKey(baseUrl);
     super({ ...config, baseUrl, apiKey });
     this.backend = detectLocalBackend(baseUrl);
+    this.type = this.backend;
   }
 
   /**
