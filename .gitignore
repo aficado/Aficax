@@ -16,3 +16,7 @@ img2.jpeg
 *.log
 .DS_Store
 Thumbs.db
+
+# Repomix packed outputs (regenerate locally with `npx repomix`)
+*-review.md
+*repomix*.md

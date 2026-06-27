@@ -47,3 +47,7 @@ coverage/
 # Aficax runtime data (when installed as a tool)
 .aficax/
 *.aficax-sess-*
+
+# Repomix packed outputs (regenerate locally with `npx repomix`)
+*-review.md
+*repomix*.md
